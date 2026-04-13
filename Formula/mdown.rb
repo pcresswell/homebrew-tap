@@ -10,7 +10,12 @@ class Mdown < Formula
 
   def install
     system "swift", "build", "-c", "release", "--disable-sandbox"
-    bin.install ".build/release/MDown" => "mdown"
+
+    # Swift puts the binary under an arch-specific path
+    bin_path = Dir[".build/*-apple-macosx/release/MDown"].first
+    raise "MDown binary not found after build" unless bin_path
+
+    bin.install bin_path => "mdown"
 
     # Build the .app bundle
     app_bundle = prefix/"MDown.app"
@@ -21,12 +26,9 @@ class Mdown < Formula
     macos_dir.mkpath
     resources.mkpath
 
-    cp ".build/release/MDown", macos_dir/"MDown"
+    cp bin/"mdown", macos_dir/"MDown"
     cp "Resources/Info.plist", contents/"Info.plist"
     cp "Resources/MDown.icns", resources/"MDown.icns" if File.exist?("Resources/MDown.icns")
-
-    # Link the .app bundle into the global Applications directory
-    (HOMEBREW_PREFIX/"bin").install_symlink bin/"mdown"
   end
 
   def caveats
