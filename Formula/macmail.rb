@@ -9,7 +9,7 @@ class Macmail < Formula
   depends_on :macos
 
   def install
-    system "go", "mod", "download"
+    system "go", "mod", "tidy"
     ldflags = "-X main.version=#{version}"
     system "go", "build", *std_go_args(ldflags:), "./cmd/macmail"
   end
