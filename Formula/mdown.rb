@@ -1,8 +1,8 @@
 class Mdown < Formula
   desc "Fast, native macOS Markdown reader built with SwiftUI and cmark-gfm"
   homepage "https://github.com/pcresswell/mdown"
-  url "https://github.com/pcresswell/mdown/archive/refs/tags/v1.5.tar.gz"
-  sha256 "897f5705884937987ee7af09612be192f6b4396bc4c7db2ff2eec8b7f5cca026"
+  url "https://github.com/pcresswell/mdown/archive/refs/tags/v1.6.tar.gz"
+  sha256 "8510e39e3ccb1bc6996fc3bca4df449ca2d2913eb3c02883ce76a5c392e8bd1e"
   license "MIT"
 
   depends_on xcode: ["15.0", :build]
