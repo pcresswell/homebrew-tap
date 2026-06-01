@@ -17,6 +17,12 @@ class Mdown < Formula
 
     bin.install bin_path => "mdown"
 
+    # SwiftPM resource bundle (mermaid.min.js, loaded via Bundle.module).
+    resource_bundle = Dir[".build/*-apple-macosx/release/MDown_MDown.bundle"].first
+
+    # Place it next to the CLI binary so `mdown file.md` finds it too.
+    cp_r resource_bundle, bin if resource_bundle
+
     # Build the .app bundle
     app_bundle = prefix/"MDown.app"
     contents = app_bundle/"Contents"
@@ -29,6 +35,11 @@ class Mdown < Formula
     cp bin/"mdown", macos_dir/"MDown"
     cp "Resources/Info.plist", contents/"Info.plist"
     cp "Resources/MDown.icns", resources/"MDown.icns" if File.exist?("Resources/MDown.icns")
+
+    # Bundle.module resolves via Bundle.main.resourceURL when launched as an
+    # .app, so the resource bundle must live in Contents/Resources for Mermaid
+    # diagrams to render.
+    cp_r resource_bundle, resources if resource_bundle
   end
 
   def caveats
