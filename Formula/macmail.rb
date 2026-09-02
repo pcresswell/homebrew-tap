@@ -1,8 +1,8 @@
 class Macmail < Formula
   desc "CLI tool to query and read emails stored locally by Apple Mail on macOS"
   homepage "https://github.com/pcresswell/macmail"
-  url "https://github.com/pcresswell/macmail/archive/refs/tags/v1.2.0.tar.gz"
-  sha256 "a406590785162b7b2c91554c7039756f726afa78bccbce1875a84d7dd93a3250"
+  url "https://github.com/pcresswell/macmail/archive/refs/tags/v1.2.1.tar.gz"
+  sha256 "5b403b875cf809395a4686c4cee986bcce001335e1e3fa5ef74642c625a62c66"
   license "MIT"
 
   depends_on "go" => :build
